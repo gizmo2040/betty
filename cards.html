@@ -139,12 +139,15 @@
 			function funClickButton(e){
 				$(this).addClass("buttonSelec");
 				switch($(this).attr("id")){
-					case 'B1':level=0;
-					          break;
-					case 'B2':level=1;
-					          break;
-					case 'B3':level=2;
-							  break;
+					case 'B1':
+						level=0;
+					break;
+					case 'B2':
+						level=1;
+					break;
+					case 'B3':
+						level=2;
+					break;
 				}
 				$(".button").unbind("click");
 				init();
