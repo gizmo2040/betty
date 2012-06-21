@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<style>
+			.card {
+				position: absolute;
+				display: inline-block;
+				border: 1px solid blue;
+			}
+			.button{
+				width:70px;
+			    height:30px;
+			}
+			.buttonSelec{
+			    border: 1px solid red;
+			}
+			.ButtonAb{
+				position: absolute;
+				border: 3px solid green;
+				top: 100;
+				left:900;
+			}
+			
+		</style>
+		<script src="http://code.jquery.com/jquery-latest.js"> </script>
+	</head>
+	<body>
+
+		<script>
+			var confObje = {
+				"sw" : 10,
+				"sh" : 10,
+				"infoArr" : [{
+					"width" : 200,
+					"height" : 200,
+					"cols" : 2,
+					"cant" : 6,
+					"imgUrl" : 'http://www.ergoux.com/kituTest/memorama_level_1.jpg'
+				}, {
+					"width" : 150,
+					"height" : 150,
+					"cols" : 3,
+					"cant" : 12,
+					"imgUrl" : 'http://www.ergoux.com/kituTest/memorama_level_2.jpg'
+				}, {
+					"width" : 110,
+					"height" : 110,
+					"cols" : 4,
+					"cant" : 20,
+					"imgUrl" : 'http://www.ergoux.com/kituTest/memorama_level_3.jpg'
+				}]
+			}
+
+			var arrRnds = [];
+			var currTop = 0;
+			var currLeft = 0;
+			var contPair = 0;
+			var level = 0;
+			var prevClicked = null;
+
+			$(document).ready(addListeners);
+			
+			function addListeners(e){
+				$(".button").click(funClickButton);
+			}
+			
+			function init() {
+				var ii = ((confObje.infoArr[level].cant) / 2);
+				while (ii > 0) {
+					arrRnds.push(ii);
+					arrRnds.push(ii--)
+				}
+
+				for ( i = 0; i < confObje.infoArr[level].cant; i++) {
+					if (currLeft == confObje.infoArr[level].cols) {
+						currTop++;
+						currLeft = 0;
+					}
+
+					var xx = (confObje.infoArr[level].width + confObje.sw) * currTop;
+					var yy = (confObje.infoArr[level].height + confObje.sh) * currLeft;
+					var rand = arrRnds.splice(Math.floor(Math.random() * arrRnds.length),1)[0];
+
+					$('<div/>', {
+						'id' : "card-" + i,
+						'class' : "card",
+						'num' : rand
+					}).css({
+						"top" : yy,
+						"left" : xx,
+						"width" : confObje.infoArr[level].width,
+						"height" : confObje.infoArr[level].height,
+						"background" : "url('" + confObje.infoArr[level].imgUrl + "')"
+					}).appendTo('.cards');
+
+					currLeft++;
+
+				}
+				$(".card").click(funClickCard);
+			}
+
+			function funClickCard(e) {
+				var pos = ($(this).attr('num') * confObje.infoArr[level].width );
+
+				if (prevClicked) {
+					if (prevClicked.attr('num') == $(e.currentTarget).attr('num')) {
+						$(this).css("background", "url('" + confObje.infoArr[level].imgUrl + "') no-repeat -" + pos + "px -0px");
+						$(this).unbind('click');
+						prevClicked.unbind('click');
+						prevClicked = null;
+						contPair++;
+
+					} else {
+						prevClicked.bind("click", funClickCard);
+						$(this).css("background", "url('" + confObje.infoArr[level].imgUrl + "') no-repeat -" + pos + "px -0px");
+
+						var refThis = this;
+						var refPrevC = prevClicked;
+						setTimeout(function() {
+							$(refThis).css("background", "url('" + confObje.infoArr[level].imgUrl + "') no-repeat 0px  0px");
+							$(refPrevC).css("background", "url('" + confObje.infoArr[level].imgUrl + "') no-repeat 0px  0px");
+						}, 800);
+
+						prevClicked = null;
+
+					}
+				} else {
+					$(this).css("background", "url('" + confObje.infoArr[level].imgUrl + "') no-repeat -" + pos + "px -0px");
+					prevClicked = $(e.currentTarget);
+					prevClicked.unbind('click');
+				}
+
+				if (contPair == (confObje.infoArr[level].cant / 2)) {
+					gano();
+				  
+				}
+
+			}
+			
+			function funClickButton(e){
+				$(this).addClass("buttonSelec");
+				switch($(this).attr("id")){
+					case 'B1':level=0;
+					          break;
+					case 'B2':level=1;
+					          break;
+					case 'B3':level=2;
+							  break;
+				}
+				$(".button").unbind("click");
+				init();
+			}
+			
+			function gano(){
+						alert("GANO");
+			}
+
+		</script>
+
+		<div class="cards"> </div>
+		<div class="ButtonAb"> 
+			<div id="B1" class="button"> Level 1</div>
+			<div id="B2" class="button"> Level 2</div>
+			<div id="B3" class="button"> Level 3</div>
+		
+		</div>
+	</body>
+</html>
+
