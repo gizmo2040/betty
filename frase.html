@@ -1,0 +1,107 @@
+<html>
+	<head>
+		<style>
+			.frase{
+    display: inline-block;
+}
+.lines{
+ display: inline-block;
+ border: 1px solid red;
+ padding: 0px 10px 0px 10px;
+}
+.linesDrop{
+ display: inline-block;
+     border: 1px solid green;
+}
+.wordDiv{
+    width: 110px;
+    height: 60px;
+    display: inline-block;
+}
+p{
+    font-size:150%;
+    color:purple;
+}
+
+.dragWordClass{
+ display: inline-block;
+ border: 1px solid black;
+}
+			
+		</style>
+		<script src="http://code.jquery.com/jquery-latest.js"> </script>
+	</head>
+	<body>
+
+		<script>
+var input_str = "The [click] event is sent to [an] element when the mouse pointer is over the element, [and] the [mouse] button is pressed and [released]. Any HTML element can receive this event."
+
+var contWord=0;    
+var contLines=0;
+var dragWords = new RegExp(/\[([\w\s]+)\]/g);
+var res = ""
+
+res = input_str.replace(dragWords, function(match, word,position) {
+    var returnVar = "<div id='drop-" + position + "' class='lines'>";
+    for (var i = 0, max = word.length; i < max; i++) {
+        returnVar += "_";
+    }
+    
+    
+    $('<div/>', {
+        id: "drag-" + position,
+        class: "dragWordClass"
+  }).html(word).appendTo('.wordDiv');
+    
+     contWord+=1;
+        
+  return returnVar + "</div>";
+});
+
+
+
+$(".frase").html(res);
+
+
+ $(".dragWordClass" ).draggable({ revert: "invalid" });
+    
+  $(".lines" ).droppable({
+            drop: function ( event, ui ) {
+                var dropId = $(this).attr("id");
+                var dropI=dropId.split("-");
+                var dragId = ui.draggable[0].id;
+                var dragI=dragId.split("-");
+                
+                if(dropI[1]==dragI[1]){
+                    contLines+=1;
+                    var word = $("#" +dragId).html();
+                    $("#"+dropId).html(word);
+                    $("#" +dragId).draggable("destroy");
+                    $('div').remove("#" +dragId);
+                    
+                    $(this).addClass("linesDrop");
+                    
+                    
+                    if( contLines == contWord ){
+                         $("p").show("slow");
+                    }
+
+                     }else{
+                   $("#" +dragId).animate({
+                        top:0,
+                        left:0});
+                  
+                       }
+            }
+
+
+        });
+            
+</script>
+ <div class="frase"> </div><br><br>
+<div class="wordDiv"> </div>
+<center> <p style="display: none">¡Juego Terminado! </p> </center>
+
+	</body>
+</html>
+
