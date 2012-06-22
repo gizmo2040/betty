@@ -1,40 +1,47 @@
 <html>
 	<head>
 		<style>
-#photo{
-background-image:url(http://www.articulosweb.net/blog/wp-content/gallery/eu-decidi-dar-flores-mas-qual/eu-decidi-dar-flores-mas-qual-1.jpg);
-width: 520px;
-height: 350px;
-}
-#obj{
-opacity:0.2;
-filter:alpha(opacity=10);
-}
-p{
-    font-size:200%;
-    color:white;
-}
-</style>
+			#photo {
+				background-image: url(http://www.articulosweb.net/blog/wp-content/gallery/eu-decidi-dar-flores-mas-qual/eu-decidi-dar-flores-mas-qual-1.jpg);
+				width: 520px;
+				height: 350px;
+			}
+			#obj {
+				opacity: 0.2;
+				filter: alpha(opacity=10);
+			}
+			p {
+				font-size: 200%;
+				color: white;
+			}
+		</style>
 		<script src="http://code.jquery.com/jquery-latest.js"> </script>
 	</head>
 	<body>
 
 		<script>
+			var confObje = {
+				"top" : 70,
+				"left" : 245,
+				"width" : 60,
+				"height" : 60
+			}
+			$("#obj").css(confObje);
 
+			$("#obj").click(function() {
+				$("p").show("slow");
+			});
+		</script>
 
-var confObje={"top":70,"left":245,"width":60,"height":60}
-$("#obj").css(confObje);
+		<div id="photo">
+			<center>
+				<p style="display: none">
+					¡Se encontró el objeto!
+				</p>
+			</center>
+		</div>
+		<div id="obj" style="position: absolute;bottom:0px;"> </div>
 
-
-$("#obj").click(function() {
-  $("p").show("slow");
-});
-</script>
-
-<div id="photo">
-<center> <p style="display: none"> ¡Se encontró el objeto! </p> </center> </div>
-<div id="obj" style="position: absolute;bottom:0px;"> </div>
-
-</body>
+	</body>
 </html>
 
