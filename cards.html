@@ -1,23 +1,53 @@
 <html>
 	<head>
 		<style>
+		    .background{
+		    	position: absolute;
+		    	background:url('imgs/fondo.jpg');
+				width:960px;
+			    height:599px;
+		    	
+		    }
+		    .titulo{
+				background:url('imgs/memorama.png');
+				position: absolute;
+				top: 60;
+				left:360;
+				width:274px;
+			    height:52px;
+		    	
+			}
 			.card {
 				position: absolute;
 				display: inline-block;
-				border: 1px solid blue;
 			}
-			.button{
-				width:70px;
-			    height:30px;
-			}
-			.buttonSelec{
-			    border: 1px solid red;
+			
+			.cards{
+				position: absolute;
+				top: 100;
+				left:180;
 			}
 			.ButtonAb{
 				position: absolute;
-				border: 3px solid green;
-				top: 100;
-				left:900;
+				top: 260;
+				left:830;
+			}
+			#B1{
+				background:url('imgs/b1.png');
+				width:100px;
+			    height:99px;
+			}
+			#B2{
+				background:url('imgs/b2.png');
+				width:100px;
+			    height:99px;
+				
+			}
+			#B3{
+				background:url('imgs/b3.png');
+				position: absolute;
+				width:100px;
+			    height:99px;
 			}
 			
 		</style>
@@ -137,16 +167,18 @@
 			}
 			
 			function funClickButton(e){
-				$(this).addClass("buttonSelec");
 				switch($(this).attr("id")){
 					case 'B1':
 						level=0;
+						$(this).css("background","url('imgs/BOTONN1.png')");
 					break;
 					case 'B2':
 						level=1;
+						$(this).css("background","url('imgs/BOTONN2.png')");
 					break;
 					case 'B3':
 						level=2;
+						$(this).css("background","url('imgs/BOTONN3.png')");
 					break;
 				}
 				$(".button").unbind("click");
@@ -158,13 +190,14 @@
 			}
 
 		</script>
-
+		<div class="background">
 		<div class="cards"> </div>
+		<div class="titulo"> </div>
 		<div class="ButtonAb"> 
-			<div id="B1" class="button"> Level 1</div>
-			<div id="B2" class="button"> Level 2</div>
-			<div id="B3" class="button"> Level 3</div>
-		
+			<div id="B1" class="button"> </div>
+			<div id="B2" class="button"> </div>
+			<div id="B3" class="button"> </div>
+		 </div>
 		</div>
 	</body>
 </html>
