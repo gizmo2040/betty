@@ -1,0 +1,146 @@
+<html>
+	<head>
+		<style>
+			.frase {
+				display: inline-block;
+				position: absolute;
+			}
+			.lines {
+				display: inline-block;
+				border: 1px solid red;
+				padding: 0px 10px 0px 10px;
+			}
+			.linesDrop {
+				display: inline-block;
+				border: 1px solid green;
+			}
+			.wordDiv {
+				width: 110px;
+				height: 60px;
+				display: inline-block;
+			}
+			p {
+				font-size: 150%;
+				color: purple;
+			}
+
+			.dragWordClass {
+				display: inline-block;
+				border: 1px solid black;
+			}
+
+			.select {
+				display: inline-block;
+				border: 1px solid yellow;
+			}
+
+		</style>
+		<script src="js/jquery-1.7.2.min.js"></script>
+		<script src="js/jquery-ui-1.8.21.custom.min.js"></script>
+	</head>
+	<body>
+
+		<script>
+			var input_str = "The [click] event is sent to [an] element when the mouse pointer is over the element, and the [mouse] button is pressed and released. Any HTML element can receive this event."
+			var dropIdR = 0;
+			var contWord = 0;
+			var contLines = 0;
+			var dragWords = new RegExp(/\[([\w\s]+)\]/g);
+			var res = "";
+			var prevClicked = null;
+			var prevClickedDrag = 0;
+
+			$(document).ready(init);
+
+			function init() {
+
+				res = input_str.replace(dragWords, function(match, word, position) {
+					var returnVar = "<div id='drop-" + position + "' class='lines'>";
+					for (var i = 0, max = word.length; i < max; i++) {
+						returnVar += "_";
+					}
+
+					$('<div/>', {
+						id : "drag-" + position,
+						class : "dragWordClass"
+					}).html(word).appendTo('.wordDiv');
+
+					contWord += 1;
+
+					return returnVar + "</div>";
+
+				});
+				$(".frase").html(res);
+
+				$(".dragWordClass").click(wordClick);
+				$(".lines").click(wordClick);
+
+			}
+
+			function wordClick(e) {
+
+				var isDrag = ($( e.currentTarget ).attr("id").split("-")[0] == 'drag');
+
+				if (isDrag) {
+					$(".lines").addClass("select");
+					$(".dragWordClass").removeClass("select");
+				} else {
+					$(".dragWordClass").addClass("select");
+					$(".lines").removeClass("select");
+
+				}
+
+				if (prevClicked) {
+					if ((prevClickedDrag && !isDrag) || (!prevClickedDrag && isDrag)) {
+						
+						var idPrev = prevClicked.attr("id");
+						var dragI = idPrev.split("-");
+						var dropId = $(this).attr("id");
+						var dropI = dropId.split("-");
+
+						if (dropI[1] == dragI[1]) {
+							alert("son iguales");
+							contLines += 1;
+
+							if(prevClickedDrag){
+							var word = $("#" + prevClicked.attr("id")).html();
+							$("#" + dropId).html(word);
+							$('div').remove("#" + prevClicked.attr("id"));
+							$(this).addClass("linesDrop");
+							}else{
+							 var word = $("#" + $(this).attr("id")).html();
+							 $("#" + prevClicked.attr("id")).html(word);
+							 $('div').remove("#" + $(this).attr("id"));
+							 $("#" + prevClicked.attr("id")).addClass("linesDrop");
+							 }
+							 
+							 
+							if (contLines == contWord) {
+								$("p").show("slow");
+							}
+							prevClicked = null;
+
+						} else {
+							alert("no son iguales");
+						}
+					}
+				} else {
+					prevClicked = $(e.currentTarget);
+					prevClickedDrag = isDrag;
+				}
+
+			}
+
+		</script>
+		<div class="frase"></div>
+		<br>
+		<br>
+		<div class="wordDiv"></div>
+		<center>
+			<p style="display: none">
+				¡Juego Terminado!
+			</p>
+		</center>
+
+	</body>
+</html>
