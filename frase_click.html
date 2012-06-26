@@ -5,38 +5,41 @@
 				display: inline-block;
 				position: absolute;
 			}
-			.lines {
-				display: inline-block;
-				border: 1px solid red;
-				padding: 0px 10px 0px 10px;
-			}
-			.linesDrop {
-				display: inline-block;
-				border: 1px solid green;
-			}
 			.wordDiv {
 				width: 110px;
 				height: 60px;
 				display: inline-block;
+			}
+			.lines {
+				display: inline-block;
+				border: 1px solid black;
+				padding: 0px 10px 0px 10px;
+			}
+			.dragWordClass {
+				display: inline-block;
+				border: 1px solid black;
+			}
+			.selectClick{
+				display: inline-block;
+				border: 3px solid red;
+			}
+			.select {
+				display: inline-block;
+				border: 1px solid blue;
+			}
+			.linesDrop {
+				display: inline-block;
+				border: 1px solid green;
 			}
 			p {
 				font-size: 150%;
 				color: purple;
 			}
 
-			.dragWordClass {
-				display: inline-block;
-				border: 1px solid black;
-			}
-
-			.select {
-				display: inline-block;
-				border: 1px solid yellow;
-			}
-
+			
 		</style>
-		<script src="js/jquery-1.7.2.min.js"></script>
-		<script src="js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script src="js/jquery-1.7.2.min.js"> </script>
+		<script src="js/jquery-ui-1.8.21.custom.min.js"> </script>
 	</head>
 	<body>
 
@@ -78,69 +81,77 @@
 			}
 
 			function wordClick(e) {
-
+				
 				var isDrag = ($( e.currentTarget ).attr("id").split("-")[0] == 'drag');
-
 				if (isDrag) {
 					$(".lines").addClass("select");
 					$(".dragWordClass").removeClass("select");
 				} else {
 					$(".dragWordClass").addClass("select");
 					$(".lines").removeClass("select");
-
 				}
 
+				
+				
 				if (prevClicked) {
 					if ((prevClickedDrag && !isDrag) || (!prevClickedDrag && isDrag)) {
-						
+                       // $("#" + prevClicked.attr("id")).removeClass("selectClick");
 						var idPrev = prevClicked.attr("id");
 						var dragI = idPrev.split("-");
 						var dropId = $(this).attr("id");
 						var dropI = dropId.split("-");
 
 						if (dropI[1] == dragI[1]) {
-							alert("son iguales");
 							contLines += 1;
 
-							if(prevClickedDrag){
-							var word = $("#" + prevClicked.attr("id")).html();
-							$("#" + dropId).html(word);
-							$('div').remove("#" + prevClicked.attr("id"));
-							$(this).addClass("linesDrop");
-							}else{
-							 var word = $("#" + $(this).attr("id")).html();
-							 $("#" + prevClicked.attr("id")).html(word);
-							 $('div').remove("#" + $(this).attr("id"));
-							 $("#" + prevClicked.attr("id")).addClass("linesDrop");
-							 }
-							 
-							 
+							if (prevClickedDrag) {
+								var word = $("#" + prevClicked.attr("id")).html();
+								$("#" + dropId).html(word);
+								$('div').remove("#" + prevClicked.attr("id"));
+								$(this).unbind('click');
+								//$(this).addClass("linesDrop");
+							} else {
+								var word = $("#" + $(this).attr("id")).html();
+								$("#" + prevClicked.attr("id")).html(word);
+								$('div').remove("#" + $(this).attr("id"));
+								$("#" + prevClicked.attr("id")).unbind('click');
+								//$("#" + prevClicked.attr("id")).addClass("linesDrop");
+							}
+
 							if (contLines == contWord) {
-								$("p").show("slow");
+								gano();
 							}
 							prevClicked = null;
+							$(".lines").removeClass("select");
+					        $(".dragWordClass").removeClass("select");
 
-						} else {
-							alert("no son iguales");
-						}
+						}else{
+						$("#" + prevClicked.attr("id")).addClass("selectClick");
+						//$("#" + $(this).attr("id")).removeClass("selectClick");
+							}
+					}else{
+						$("#" + prevClicked.attr("id")).removeClass("selectClick");
+						$("#" + $(this).attr("id")).addClass("selectClick");
+						prevClicked = $(e.currentTarget);
 					}
 				} else {
 					prevClicked = $(e.currentTarget);
+					$("#" + $(this).attr("id")).addClass("selectClick");
 					prevClickedDrag = isDrag;
 				}
 
 			}
 
+			function gano() {
+				$("p").show("slow");
+			}
+
 		</script>
-		<div class="frase"></div>
+		<div class="frase"> </div>
 		<br>
 		<br>
-		<div class="wordDiv"></div>
-		<center>
-			<p style="display: none">
-				¡Juego Terminado!
-			</p>
-		</center>
+		<div class="wordDiv"> </div>
+		<center> <p style="display: none">Gano!!! </p> </center>
 
 	</body>
 </html>
