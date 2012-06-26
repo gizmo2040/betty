@@ -19,7 +19,7 @@
 				display: inline-block;
 				border: 1px solid black;
 			}
-			.selectClick{
+			.selectClick {
 				display: inline-block;
 				border: 3px solid red;
 			}
@@ -29,14 +29,13 @@
 			}
 			.linesDrop {
 				display: inline-block;
-				border: 1px solid green;
+				border: 3px solid green;
 			}
 			p {
 				font-size: 150%;
 				color: purple;
 			}
 
-			
 		</style>
 		<script src="js/jquery-1.7.2.min.js"> </script>
 		<script src="js/jquery-ui-1.8.21.custom.min.js"> </script>
@@ -81,21 +80,12 @@
 			}
 
 			function wordClick(e) {
-				
-				var isDrag = ($( e.currentTarget ).attr("id").split("-")[0] == 'drag');
-				if (isDrag) {
-					$(".lines").addClass("select");
-					$(".dragWordClass").removeClass("select");
-				} else {
-					$(".dragWordClass").addClass("select");
-					$(".lines").removeClass("select");
-				}
 
-				
-				
+				var isDrag = ($( e.currentTarget ).attr("id").split("-")[0] == 'drag');
+
 				if (prevClicked) {
 					if ((prevClickedDrag && !isDrag) || (!prevClickedDrag && isDrag)) {
-                       // $("#" + prevClicked.attr("id")).removeClass("selectClick");
+
 						var idPrev = prevClicked.attr("id");
 						var dragI = idPrev.split("-");
 						var dropId = $(this).attr("id");
@@ -109,13 +99,13 @@
 								$("#" + dropId).html(word);
 								$('div').remove("#" + prevClicked.attr("id"));
 								$(this).unbind('click');
-								//$(this).addClass("linesDrop");
+								$(this).addClass("linesDrop");
 							} else {
 								var word = $("#" + $(this).attr("id")).html();
 								$("#" + prevClicked.attr("id")).html(word);
 								$('div').remove("#" + $(this).attr("id"));
 								$("#" + prevClicked.attr("id")).unbind('click');
-								//$("#" + prevClicked.attr("id")).addClass("linesDrop");
+								$("#" + prevClicked.attr("id")).addClass("linesDrop");
 							}
 
 							if (contLines == contWord) {
@@ -123,18 +113,21 @@
 							}
 							prevClicked = null;
 							$(".lines").removeClass("select");
-					        $(".dragWordClass").removeClass("select");
-
-						}else{
-						$("#" + prevClicked.attr("id")).addClass("selectClick");
-						//$("#" + $(this).attr("id")).removeClass("selectClick");
-							}
-					}else{
+							$(".dragWordClass").removeClass("select");
+						} 
+					} else {
 						$("#" + prevClicked.attr("id")).removeClass("selectClick");
 						$("#" + $(this).attr("id")).addClass("selectClick");
 						prevClicked = $(e.currentTarget);
 					}
 				} else {
+					if (isDrag) {
+						$(".lines").addClass("select");
+						$(".dragWordClass").removeClass("select");
+					} else {
+						$(".dragWordClass").addClass("select");
+						$(".lines").removeClass("select");
+					}
 					prevClicked = $(e.currentTarget);
 					$("#" + $(this).attr("id")).addClass("selectClick");
 					prevClickedDrag = isDrag;
@@ -151,7 +144,11 @@
 		<br>
 		<br>
 		<div class="wordDiv"> </div>
-		<center> <p style="display: none">Gano!!! </p> </center>
+		<center>
+			<p style="display: none">
+				Gano!!!
+			</p>
+		</center>
 
 	</body>
 </html>
