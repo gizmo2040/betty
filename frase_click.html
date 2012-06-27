@@ -1,14 +1,29 @@
 <html>
 	<head>
 		<style>
+			 .background{
+		    	position: absolute;
+		    	background:url('imgs/fondo.jpg');
+				width:960px;
+			    height:599px;
+		    	
+		    }
 			.frase {
 				display: inline-block;
 				position: absolute;
+				width:600px;
+			    height:100px;
+				left:180;
+				top: 150;
 			}
 			.wordDiv {
-				width: 110px;
-				height: 60px;
 				display: inline-block;
+				position: absolute;
+				width: 600px;
+				height: 100px;
+				left:180;
+				top: 250;
+				
 			}
 			.lines {
 				display: inline-block;
@@ -18,6 +33,8 @@
 			.dragWordClass {
 				display: inline-block;
 				border: 1px solid black;
+				margin: 5px 5px; 
+				
 			}
 			.selectClick {
 				display: inline-block;
@@ -31,9 +48,26 @@
 				display: inline-block;
 				border: 3px solid green;
 			}
-			p {
-				font-size: 150%;
+			#error {
+				font-size: 200%;
+				color: red;
+				position: absolute;
+				top: 300;
+				left:400;
+			}
+			#right{
+				font-size: 200%;
+				color: green;
+				position: absolute;
+				top: 300;
+				left:400;
+			}
+			#ganoP{
+				font-size: 200%;
 				color: purple;
+				position: absolute;
+				top: 300;
+				left:400;
 			}
 
 		</style>
@@ -51,27 +85,35 @@
 			var res = "";
 			var prevClicked = null;
 			var prevClickedDrag = 0;
-
+	
+			
 			$(document).ready(init);
 
 			function init() {
-
+				var arrWords = [];
+				
 				res = input_str.replace(dragWords, function(match, word, position) {
 					var returnVar = "<div id='drop-" + position + "' class='lines'>";
 					for (var i = 0, max = word.length; i < max; i++) {
 						returnVar += "_";
 					}
 
-					$('<div/>', {
-						id : "drag-" + position,
-						class : "dragWordClass"
-					}).html(word).appendTo('.wordDiv');
-
+					arrWords.push({"word":word,"position":position});
 					contWord += 1;
-
 					return returnVar + "</div>";
 
 				});
+				
+				
+				for (var i = 0, i=0; i < contWord; i++) {
+					var wordObj = arrWords.splice(Math.floor(Math.random() * arrWords.length),1)[0];
+						$('<div/>', {
+						id : "drag-" + wordObj.position,
+						class : "dragWordClass"
+					}).html(wordObj.word).appendTo('.wordDiv');
+				}
+					 
+				
 				$(".frase").html(res);
 
 				$(".dragWordClass").click(wordClick);
@@ -92,6 +134,7 @@
 						var dropI = dropId.split("-");
 
 						if (dropI[1] == dragI[1]) {
+							$("#right").show("slow").delay(300).hide("slow");
 							contLines += 1;
 
 							if (prevClickedDrag) {
@@ -114,8 +157,11 @@
 							prevClicked = null;
 							$(".lines").removeClass("select");
 							$(".dragWordClass").removeClass("select");
+						}else{
+							$("#error").show("slow").delay(300).hide("slow");
 						} 
 					} else {
+						
 						$("#" + prevClicked.attr("id")).removeClass("selectClick");
 						$("#" + $(this).attr("id")).addClass("selectClick");
 						prevClicked = $(e.currentTarget);
@@ -136,19 +182,20 @@
 			}
 
 			function gano() {
-				$("p").show("slow");
+				//alert("GANO!!");
+				$("#ganoP").delay(1000).show("slow");
+				
 			}
 
 		</script>
+		<div class="background">
 		<div class="frase"> </div>
 		<br>
 		<br>
 		<div class="wordDiv"> </div>
-		<center>
-			<p style="display: none">
-				Gano!!!
-			</p>
-		</center>
-
+		<center> <p style="display: none" id="error"> Error</p> </center>
+		<center> <p style="display: none" id="right"> Right</p> </center>
+		<center> <p style="display: none" id="ganoP"> GANO!!</p> </center>
+        </div>
 	</body>
 </html>
