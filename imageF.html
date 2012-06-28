@@ -15,32 +15,39 @@
 				color: white;
 			}
 		</style>
-		<script src="http://code.jquery.com/jquery-latest.js"> </script>
+		<script src="js/jquery-1.7.2.min.js"> </script>
+		<script src="js/jquery-ui-1.8.21.custom.min.js"> </script>
 	</head>
 	<body>
 
 		<script>
 			var confObje = {
-				"top" : 70,
+				"top" : 90,
 				"left" : 245,
-				"width" : 60,
-				"height" : 60
+				"width" : 90,
+				"height" : 90
 			}
-			$("#obj").css(confObje);
 
-			$("#obj").click(function() {
-				$("p").show("slow");
-			});
+			$(document).ready(init);
+
+			function init() {
+				$("#obj").css(confObje);
+
+				$("#obj").click(function() {
+					$("#obj").css("border","3px solid white");
+					$("p").show("slow");
+				});
+			}
 		</script>
 
 		<div id="photo">
 			<center>
 				<p style="display: none">
-					¡Se encontró el objeto!
+					¡Se encontro el objeto!
 				</p>
 			</center>
 		</div>
-		<div id="obj" style="position: absolute;bottom:0px;"> </div>
+		<div id="obj" style="position: absolute;bottom:0px;"></div>
 
 	</body>
 </html>
