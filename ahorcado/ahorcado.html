@@ -1,0 +1,283 @@
+<html>
+<head>
+
+<style type="text/css">
+
+#pizarron
+{
+height: 220px;
+width: 300px;
+position: absolute;
+left: 400px;
+top: 50px;
+background-color:green;
+border: 5px solid;
+border-color:brown;
+
+
+}
+
+.tecla{
+display: inline-block;
+border: 1px solid brown;
+padding-right: 2px;
+padding-left: 2px;
+font-size: larger;
+background-color: beige;
+height: 25px;
+width: 25px;
+text-align: center;
+
+
+}
+
+.teclawrong{
+display: inline-block;
+border: 1px solid red
+padding-right: 2px;
+padding-left: 2px;
+font-size: larger;
+background-color: red;
+height: 25px;
+width: 25px;
+text-align: center;
+
+}
+
+.teclayes{
+display: inline-block;
+border: 1px solid blue;
+padding-right: 2px;
+padding-left: 2px;
+font-size: larger;
+background-color: blue;
+height: 25px;
+width: 25px;
+text-align: center;
+
+}
+
+#teclado{
+
+border: 2px solid grey;
+position: absolute;
+left:150px ;
+top: 350px ;
+
+
+
+}
+#palabra{
+
+position: absolute;
+left: 450px;
+top: 300px;
+
+}
+
+
+.letras{
+display: inline-block;
+padding-right: 4px;
+padding-left: 4px;
+font-size: xx-large;
+
+}
+
+.seleccionado{
+
+border: 2px solid green;
+}
+
+#hangman{
+
+background-image:url('ahorcado-xport.png');
+height: 220px;
+width: 300px;
+
+
+
+}
+
+
+
+</style>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+
+var aciertos = 0;
+var numFallos = 0;
+var arrayABC = new Array ("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+
+var palabras = [];
+
+palabras [0]='Junta';
+palabras [1]='Bonafont';
+palabras [2]='Seven';
+palabras [3]='Ahorcado';
+palabras [4]='Ergoux';
+palabras [5]='Jackson';
+
+var randomnumber=Math.floor(Math.random()*6);
+var palabra = palabras[randomnumber];
+console.log(palabra);
+
+
+
+$(document).ready (init);
+function init (e){
+
+
+
+	for(var i=0,max=arrayABC.length;i<max;i++){
+
+    	$('<div/>', {
+    	'id': 'tecla-' + arrayABC [i],
+    	'class': 'tecla'
+    	}).html(arrayABC [i]).appendTo('#teclado');
+	}
+
+	$(".tecla").click(teclapresed);
+	$(".tecla").click(lost);
+	$(".tecla").click(won);
+
+
+	for(var i=0,max=palabra.length;i<max;i++){
+
+    	$('<div/>', {
+    	'letra': 'letra_' + palabra [i], 
+    	'class': 'letras letra_' + palabra [i],
+    	}).html("_").appendTo('#palabra');
+	}
+
+
+
+
+
+}
+
+function teclapresed (e){
+
+	var letra = e.currentTarget.id.split("-")[1];
+	if($(".letra_" + letra).length > 0){
+   
+    $(this).addClass('teclayes');
+       $(this).unbind(['click'][teclapresed]);
+    
+		$(".letra_" + letra).html(letra);
+		
+		aciertos = ( aciertos +1);
+		 // este trip es para la funcion de ganar, pero aun no le doy 
+		 
+		alert('Tu muy bien');
+	} else {
+	
+    $(this).addClass('teclawrong');
+    $(this).unbind(['click'][teclapresed]);
+   
+	   numFallos = (numFallos +1 );
+	   
+		
+	}			
+
+}
+
+function lost (e){
+/*  "top:" + num * 300 + "px"
+
+............................................________
+....................................,.-‘”...................``~.,
+.............................,.-”...................................“-.,
+.........................,/...............................................”:,
+.....................,?......................................................\,
+.................../...........................................................,}
+................./......................................................,:`^`..}
+.............../...................................................,:”........./
+..............?.....__.........................................:`.........../
+............./__.(.....“~-,_..............................,:`........../
+.........../(_....”~,_........“~,_....................,:`........_/
+..........{.._$;_......”=,_.......“-,_.......,.-~-,},.~”;/....}
+...........((.....*~_.......”=-._......“;,,./`..../”............../
+...,,,___.\`~,......“~.,....................`.....}............../
+............(....`=-,,.......`........................(......;_,,-”
+............/.`~,......`-...............................\....../\
+.............\`~.*-,.....................................|,./.....\,__
+,,_..........}.>-._\...................................|..............`=~-,
+.....`=~-,_\_......`\,.................................\
+...................`=~-,,.\,...............................\
+................................`:,,...........................`\..............__
+.....................................`=-,...................,%`>--==``
+........................................_\..........._,-%.......`\
+...................................,<`.._|_,-&``................`\
+*/
+     if (numFallos == 1){
+           	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat  0px 0px");   
+		
+
+      
+      } else if (numFallos == 2){
+      	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat -300px 0px");   
+		
+
+      } else if (numFallos == 3){
+      	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat -600px 0px");   
+		
+
+      } else if (numFallos == 4){
+      	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat -900px 0px");   
+		
+
+      } else if (numFallos == 5){
+      	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat -1200px 0px");   
+		
+
+      } else if (numFallos == 6){
+      	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat -1500px 0px");   
+		
+
+      } else if (numFallos == 7){
+      	$('#hangman').css("background", "url('ahorcado-xport.png') no-repeat  -1800px 0px");   
+		
+      }else if(numFallos == 8 ) {
+
+             alert('no la armaste');
+
+}
+
+
+
+}
+
+function won(e){
+    	if (aciertos == palabra.length){
+	alert('Ganaste tigre');	
+}
+
+}
+
+
+</script>
+ <div id="teclado">
+ </div>
+
+<div id="palabra">
+</div>
+
+
+<div id="pizarron">
+<div id="hangman">
+
+</div>
+
+</div>
+</body>
+
+</html>
