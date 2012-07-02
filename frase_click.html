@@ -78,7 +78,6 @@
 
 		<script>
 			var input_str = "The [click] event is sent to [an] element when the mouse pointer is over the element, and the [mouse] button is pressed and released. Any HTML element can receive this event."
-			var dropIdR = 0;
 			var contWord = 0;
 			var contLines = 0;
 			var dragWords = new RegExp(/\[([\w\s]+)\]/g);
@@ -193,9 +192,9 @@
 		<br>
 		<br>
 		<div class="wordDiv"> </div>
-		<center> <p style="display: none" id="error"> Error</p> </center>
-		<center> <p style="display: none" id="right"> Right</p> </center>
-		<center> <p style="display: none" id="ganoP"> GANO!!</p> </center>
+		<p style="display: none" id="error"> Error</p> 
+		<p style="display: none" id="right"> Right</p> 
+		<p style="display: none" id="ganoP"> GANO!!</p> 
         </div>
 	</body>
 </html>
