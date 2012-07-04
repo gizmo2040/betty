@@ -1,90 +1,155 @@
 <html>
 	<head>
-
+<link href='http://fonts.googleapis.com/css?family=Quicksand:700,400' rel='stylesheet' type='text/css'>
 		<style type="text/css">
 			.background{
 		    	position: absolute;
 		    	background:url('imgs/hang-pizarron.png');
 				width:980px;
 			    height:620px;
-			    
-		    	
 		    }
-			#pizarron {
-				height: 220px;
-				width: 300px;
-				position: absolute;
-				left: 400px;
-				top: 50px;
-				background-color: green;
-				border: 5px solid brown;
-			}
-
+		    #titulo{
+		    	position: absolute;
+		    	background:url('imgs/hang-title.png');
+				width:215px;
+			    height:149px;
+			    left: 92px;
+				top: 94px;
+		    }
 			.tecla {
 				display: inline-block;
-				border: 1px solid brown;
-				padding-right: 2px;
-				padding-left: 2px;
-				font-size: larger;
-				background-color: beige;
-				height: 25px;
-				width: 25px;
+				font-family: 'Quicksand', sans-serif;
+				font-weight: 700;
+				font-size: 30px;
+				color:#333;
+				height: 40px;
+				width: 40px;
 				text-align: center;
+				-webkit-box-shadow: 1px 1px 4px rgba(50, 50, 50, 0.4);
+				-moz-box-shadow: 1px 1px 4px rgba(50, 50, 50, 0.4);
+				box-shadow: 1px 1px 4px rgba(50, 50, 50, 0.4);
+				margin: 5px 5px;   
+ 				-moz-border-radius:5px;  
+ 				-webkit-border-radius:5px;
+ 				background: #dfdfdf;
+				background: -moz-linear-gradient(top, #dfdfdf 0%, #fbfbfb 17%, #d2d2d2 88%, #f5f5f5 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dfdfdf), color-stop(17%,#fbfbfb), color-stop(88%,#d2d2d2), color-stop(100%,#f5f5f5));
+				background: -webkit-linear-gradient(top, #dfdfdf 0%,#fbfbfb 17%,#d2d2d2 88%,#f5f5f5 100%);
+				background: -o-linear-gradient(top, #dfdfdf 0%,#fbfbfb 17%,#d2d2d2 88%,#f5f5f5 100%);
+				background: -ms-linear-gradient(top, #dfdfdf 0%,#fbfbfb 17%,#d2d2d2 88%,#f5f5f5 100%);
+				background: linear-gradient(to bottom, #dfdfdf 0%,#fbfbfb 17%,#d2d2d2 88%,#f5f5f5 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfdfdf', endColorstr='#f5f5f5',GradientType=0 );
 			}
-
 			.teclawrong {
-				display: inline-block;
-				border: 1px solid red;
-				padding-right: 2px;
-				padding-left: 2px;
-				font-size: larger;
-				background-color: red;
-				height: 25px;
-				width: 25px;
-				text-align: center;
+				-webkit-box-shadow: -2px -1px 4px rgba(50, 50, 50, 0.4);
+				-moz-box-shadow: -2px -1px 4px rgba(50, 50, 50, 0.4);
+				box-shadow: -2px -1px 4px rgba(50, 50, 50, 0.4);
+				background: #800101;
+				background: -moz-linear-gradient(top, #800101 0%, #cc1b1d 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#800101), color-stop(100%,#cc1b1d));
+				background: -webkit-linear-gradient(top, #800101 0%,#cc1b1d 100%);
+				background: -o-linear-gradient(top, #800101 0%,#cc1b1d 100%);
+				background: -ms-linear-gradient(top, #800101 0%,#cc1b1d 100%);
+				background: linear-gradient(to bottom, #800101 0%,#cc1b1d 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#800101', endColorstr='#cc1b1d',GradientType=0 );
 			}
-
 			.teclayes {
-				display: inline-block;
-				border: 1px solid blue;
-				padding-right: 2px;
-				padding-left: 2px;
-				font-size: larger;
-				background-color: blue;
-				height: 25px;
-				width: 25px;
-				text-align: center;
+				-webkit-box-shadow: -2px -1px 4px rgba(50, 50, 50, 0.4);
+				-moz-box-shadow: -2px -1px 4px rgba(50, 50, 50, 0.4);
+				box-shadow: -2px -1px 4px rgba(50, 50, 50, 0.4);
+				background: #094269;
+				background: -moz-linear-gradient(top, #094269 0%, #0e75bd 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#094269), color-stop(100%,#0e75bd));
+				background: -webkit-linear-gradient(top, #094269 0%,#0e75bd 100%);
+				background: -o-linear-gradient(top, #094269 0%,#0e75bd 100%);
+				background: -ms-linear-gradient(top, #094269 0%,#0e75bd 100%);
+				background: linear-gradient(to bottom, #094269 0%,#0e75bd 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#094269', endColorstr='#0e75bd',GradientType=0 );
 			}
-
-			#teclado {
-				border: 2px solid grey;
-				position: absolute;
-				left: 150px;
-				top: 350px;
-				background:url('imgs/hang-fondoteclado.png');
-			}
-
-			#palabra {
-				position: absolute;
-				left: 450px;
-				top: 300px;
-			}
-
 			.letras {
 				display: inline-block;
 				padding-right: 4px;
 				padding-left: 4px;
-				font-size: xx-large;
+				font-size: 40px;
 			}
-
+			#teclado {
+				position: absolute;
+				left: 150px;
+				top: 433px;
+				background:url('imgs/hang-fondoteclado.png');
+				width:681px;
+			    height:126px;
+			}
+			#tecladoletras{
+				cursor:pointer;
+				position: absolute;
+				left: 165px;
+				top: 445px;
+				width:685px;
+			    height:126px;
+			}
+			#palabra {
+				cursor:default;
+				position: absolute;
+				left: 350px;
+				top: 321px;
+				display: inline-block;
+				font-family: 'Quicksand', sans-serif;
+				font-weight: 700;
+				font-size: 30px;
+			}
+			#palabraPNG {
+				display: inline-block;
+				position: absolute;
+				left: 350px;
+				top: 355px;
+			}
+			.teclaPNG{
+				display: inline-block;
+				
+			}
 			#hangman {
 				background-image: url('ahorcado-xport.png');
+				position: absolute;
 				height: 220px;
 				width: 300px;
+				left: 362px;
+				top: 72px;
 			}
+			#level{
+				background-image: url('imgs/hang-choose.png');
+				position: absolute;
+				height: 48px;
+				width: 116px;
+				left: 840px;
+				top: 85px;
+			}
+			.ButtonAb{
+				position: absolute;
+				top: 120;
+				left:830;
+			}
+			#B1{
+				background:url('imgs/b1.png');
+				width:100px;
+			    height:99px;
+			}
+			#B2{
+				background:url('imgs/b2.png');
+				width:100px;
+			    height:99px;
+				
+			}
+			#B3{
+				background:url('imgs/b3.png');
+				position: absolute;
+				width:100px;
+			    height:99px;
+			}
+			
 
 		</style>
-		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"> </script>
 
 	</head>
 
@@ -93,41 +158,71 @@
 		<script type="text/javascript">
 			var aciertos = 0;
 			var numFallos = 0;
-			var arrayABC = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+			var confObj = {
+				"palabras_1": new Array("verde","amarillo"),
+				"palabras_2": new Array("betty","roman"),
+				"palabras_3": new Array("ergoux")
+			}
+			var arrayABC = new Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
 
-			var palabras = [];
 
-			palabras[0] = 'junta';
-			palabras[1] = 'bonafont';
-			palabras[2] = 'seven';
-			palabras[3] = 'ahorcado';
-			palabras[4] = 'ergoux';
-			palabras[5] = 'jackson';
-
-			var randomnumber = Math.floor(Math.random() * 6);
-			var palabra = palabras[randomnumber];
-			console.log(palabra);
+			var palabra = "";
 
 			var letrasA = [];
-
-			$(document).ready(init);
+			
+			$(document).ready(addListeners);0
+			
+			function addListeners(e){
+				$(".button").click(funClickButton);
+			}
+			
 
 			function init(e) {
+				palabra = palabras[Math.floor(Math.random() * palabras.length)];
+			console.log(palabra);
 
 				for (var i = 0, max = arrayABC.length; i < max; i++) {
 
 					$('<div/>', {
 						'id' : 'tecla-' + arrayABC[i],
 						'class' : 'tecla'
-					}).html(arrayABC[i]).appendTo('#teclado');
+						
+					}).css("color","black").css("font-size","30px").html(arrayABC[i]).appendTo('#tecladoLetras');
 				}
 
 				for (var i = 0, max = palabra.length; i < max; i++) {
+					
+					
+					$('<div/>', {
+						'class' : 'teclaPNG'
+					}).
+					css({
+						"position":"absolute",
+						"left": i*35,
+						"width" : 28,
+						"height" : 2,
+						"margin": 5 , 
+						"background-image" : "url('imgs/hang-rayita.png')"
+
+					}).appendTo('#palabraPNG');
+
 
 					$('<div/>', {
 						'letra' : 'letra_' + palabra[i],
 						'class' : 'letras letra_' + palabra[i],
-					}).html("_").appendTo('#palabra');
+					}).
+					css({
+						"position":"absolute",
+						"left": i*35,
+						"width" : 21,
+						"height" :45,
+						"margin": 5 , 
+						"text-align": "center",
+						"color": "white",
+						"font-size": "30px"
+					}).appendTo('#palabra');
+					
+					
 					if (jQuery.inArray(palabra[i], letrasA) == -1)
 						letrasA.push(palabra[i]);
 				}
@@ -141,12 +236,12 @@
 				var letra = e.currentTarget.id.split("-")[1];
 
 				if ($(".letra_" + letra).length > 0) {
-					$(this).addClass('teclayes');
+					$(this).addClass('teclayes').css("color","white");
 					$(this).unbind('click', teclapresed);
 					$(".letra_" + letra).html(letra);
 					aciertos++;
 				} else {
-					$(this).addClass('teclawrong');
+					$(this).addClass('teclawrong').css("color","white");
 					$(this).unbind('click', teclapresed);
 					numFallos++;
 				}
@@ -175,15 +270,42 @@
 				alert('Ganaste!!');
 
 			}
+			
+			 function funClickButton(e){
+				switch($(this).attr("id")){
+					case 'B1':
+						palabras=confObj.palabras_1;
+						$(this).css("background","url('imgs/BOTONN1.png')");
+					break;
+					case 'B2':
+						palabras=confObj.palabras_2;;
+						$(this).css("background","url('imgs/BOTONN2.png')");
+					break;
+					case 'B3':
+						palabras=confObj.palabras_3;
+						$(this).css("background","url('imgs/BOTONN3.png')");
+					break;
+				}
+				$(".button").unbind("click");
+				init();
+			}
+			 
 
 		</script>
 		<div class="background">
-		<div id="teclado"></div>
-		<div id="palabra"></div>
-		<div id="pizarron">
-			<div id="hangman"></div>
-
-		</div>
+		<div id="titulo"> </div>
+		<div id="teclado"> </div>
+		<div id="tecladoLetras"> </div>
+		<div id="palabra"> </div>
+		<div id="palabraPNG"> </div>
+		<div id="hangman"> </div>
+		<div id="level"> </div>
+		<div class="ButtonAb"> 
+			<div id="B1" class="button"> </div>
+			<div id="B2" class="button"> </div>
+			<div id="B3" class="button"> </div>
+		 </div>
+		
 		 </div>
 	</body>
 
