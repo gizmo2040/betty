@@ -1,73 +1,170 @@
 <html>
 	<head>
+		<link href='http://fonts.googleapis.com/css?family=Quicksand:700,400' rel='stylesheet' type='text/css'>
 		<style>
-			 .background{
-		    	position: absolute;
-		    	background:url('imgs/fondo.jpg');
-				width:960px;
-			    height:599px;
-		    	
-		    }
+			.background {
+				position: absolute;
+				background: url('fill/bg.jpg');
+				width: 960px;
+				height: 599px;
+			}
+			.title {
+				position: absolute;
+				background: url('fill/title.png');
+				width: 349px;
+				height: 70px;
+				left: 180;
+				top: 84px;
+			}
+			.choose {
+				position: absolute;
+				background: url('fill/choose.png');
+				width: 118px;
+				height: 50px;
+				left: 753px;
+				top: 137px;
+			}
 			.frase {
+				font-family: 'Quicksand', sans-serif;
+				font-weight: 700;
+				font-size: 25px;
 				display: inline-block;
 				position: absolute;
-				width:600px;
-			    height:100px;
-				left:180;
-				top: 150;
+				width: 580px;
+				height: 100px;
+				left: 130px;
+				top: 191px;
+				line-height: 30px;
 			}
 			.wordDiv {
 				display: inline-block;
+				
+				height: 600px;
+				left: 761px;
 				position: absolute;
-				width: 600px;
-				height: 100px;
-				left:180;
-				top: 250;
-				
+				 top: 212px;
+				width: 180px;
 			}
-			.lines {
+			.izqBorder {
+				background: url('fill/empty1.gif');
 				display: inline-block;
-				border: 1px solid black;
+				width: 5px;
+				height: 25px;
+			}
+			.linesEmpty {
+				background: url('fill/empty2.gif');
+				display: inline-block;
 				padding: 0px 10px 0px 10px;
+				height: 25px;
+				position: relative;
+   				 top: -1px;
+   				 color:white;
+   				 font-weight: 700;
+   				 visibility:none;
 			}
-			.dragWordClass {
+			.derBorder {
+				background: url('fill/empty3.gif');
 				display: inline-block;
-				border: 1px solid black;
-				margin: 5px 5px; 
-				
+				width: 5px;
+				height: 25px;
 			}
-			.selectClick {
+			.izqBorderRight {
+				background: url('fill/word1.gif');
 				display: inline-block;
-				border: 3px solid red;
-			}
-			.select {
-				display: inline-block;
-				border: 1px solid blue;
+				width: 5px;
+				height: 25px;
 			}
 			.linesDrop {
 				display: inline-block;
-				border: 3px solid green;
+				background: url('fill/word2.gif');
+				height: 25px;
+				color: black;
+				
 			}
-			#error {
-				font-size: 200%;
-				color: red;
-				position: absolute;
-				top: 300;
-				left:400;
+			.derBorderRight {
+				background: url('fill/word3.gif');
+				display: inline-block;
+				width: 5px;
+				height: 25px;
 			}
-			#right{
-				font-size: 200%;
-				color: green;
-				position: absolute;
-				top: 300;
-				left:400;
+			.izqDragWordClass {
+				background: url('fill/big1.png');
+				display: inline-block;
+				width: 15px;
+				height: 48px;
+				left: 0px;
+    			position: relative;
 			}
-			#ganoP{
-				font-size: 200%;
-				color: purple;
+			.dragWordClass {
+				background: url('fill/big2.png');
+				display: inline-block;
+				margin: 5px 5px;
+				font-family: 'Quicksand', sans-serif;
+				font-weight: 700;
+				font-size: 30px;
+				height: 48px;
+				position: relative;
+				left: -5px;
+				top: -19px;
+			}
+			.derDragWordClass {
+				background: url('fill/big3.png');
+				display: inline-block;
+				width: 15px;
+				height: 48px;
+				left: -10px;
+   			    position: relative;
+			}
+			.select {
+				display: inline-block;
+			}
+			.izqSelectDrag{
+				background: url('fill/bigselected1.png');
+				display: inline-block;
+				width: 15px;
+				height: 48px;
+			}
+			.selectDrag {
+				background: url('fill/bigselected2.png');
+				display: inline-block;
+				color:white;
+			}
+			.derSelectDrag{
+				background: url('fill/bigselected3.png');
+				display: inline-block;
+				width: 15px;
+				height: 48px;
+			}
+			.izqSelectDrop{
+			    background: url('fill/selected1.gif');
+				display: inline-block;
+				width: 5px;
+				height: 25px;
+			}
+			.selectDrop {
+				background: url('fill/selected2.gif');
+				display: inline-block;
+				color:#0470B5;
+			}
+			.derSelectDrop{
+				background: url('fill/selected3.gif');
+				display: inline-block;
+				width: 5px;
+				height: 25px;
+			}
+			.inst{
 				position: absolute;
-				top: 300;
-				left:400;
+				background: url('fill/instructions.png');
+				width: 193px;
+				height: 60px;
+				left: 755;
+				top: 38px;
+			}
+			.mensajes{
+				font-size: 200%;
+				position: absolute;
+				top: 500px;
+				left: 500px;
 			}
 
 		</style>
@@ -77,52 +174,73 @@
 	<body>
 
 		<script>
-			var input_str = "The [click] event is sent to [an] element when the mouse pointer is over the element, and the [mouse] button is pressed and released. Any HTML element can receive this event."
+			var input_str = "Hiram and Alan went on a quest to find a lost Inca city. They crossed a [river] and climbed over cold and foggy hills always respecting every form of [life].<br/><br/>"
+			input_str += "Finally, with a lot of [patience] and [strength] they found a very special place: Machu Picchu.<br/><br/>"
+			input_str += "Congratulations! You discovered Machu Picchu! <br/>"
 			var contWord = 0;
 			var contLines = 0;
 			var dragWords = new RegExp(/\[([\w\s]+)\]/g);
 			var res = "";
 			var prevClicked = null;
+			var prevId=0;
 			var prevClickedDrag = 0;
-	
+
+			var arrError=["error1","error2","error3"];
+			var arrRight=["right1","right2","right3"];
 			
 			$(document).ready(init);
 
 			function init() {
-				var arrWords = [];
 				
+				var arrWords = [];
+
 				res = input_str.replace(dragWords, function(match, word, position) {
-					var returnVar = "<div id='drop-" + position + "' class='lines'>";
+					var returnVar = "<div style='display:inline-block;'><div id='dropI-" + position + "' class='izqBorder'></div><div id='drop-" + position + "' class='linesEmpty'>";
 					for (var i = 0, max = word.length; i < max; i++) {
-						returnVar += "_";
+						returnVar += "&nbsp;";
 					}
 
-					arrWords.push({"word":word,"position":position});
+					arrWords.push({
+						"word" : word,
+						"position" : position
+					});
 					contWord += 1;
-					return returnVar + "</div>";
+					return returnVar + "</div><div id='dropD-" + position + "'class='derBorder'></div></div>";
 
 				});
-				
-				
-				for (var i = 0, i=0; i < contWord; i++) {
+
+				for (var i = 0, i = 0; i < contWord; i++) {
 					var wordObj = arrWords.splice(Math.floor(Math.random() * arrWords.length),1)[0];
-						$('<div/>', {
+					$('<div/>', {
+						id : "dragI-" + wordObj.position,
+						class : "izqDragWordClass"
+					}).appendTo('.wordDiv');
+					$('<div/>', {
 						id : "drag-" + wordObj.position,
 						class : "dragWordClass"
 					}).html(wordObj.word).appendTo('.wordDiv');
+					$('<div/>', {
+						id : "dragD-" + wordObj.position,
+						class : "derDragWordClass"
+					}).appendTo('.wordDiv');
+					$("<br>").appendTo('.wordDiv');
 				}
-					 
-				
+
 				$(".frase").html(res);
 
 				$(".dragWordClass").click(wordClick);
-				$(".lines").click(wordClick);
+				$(".linesEmpty").click(wordClick);
 
 			}
 
 			function wordClick(e) {
-
+				var palabraError= arrError[Math.floor(Math.random() * arrError.length)];
+				var palabraRight= arrRight[Math.floor(Math.random() * arrRight.length)];
+				
+				
 				var isDrag = ($( e.currentTarget ).attr("id").split("-")[0] == 'drag');
+				var Id = $(this).attr("id").split("-")[1];
+				
 
 				if (prevClicked) {
 					if ((prevClickedDrag && !isDrag) || (!prevClickedDrag && isDrag)) {
@@ -133,68 +251,100 @@
 						var dropI = dropId.split("-");
 
 						if (dropI[1] == dragI[1]) {
-							$("#right").show("slow").delay(300).hide("slow");
+							$(".mensajes").css("color","green").html(palabraRight).show("slow").delay(300).hide("slow");
 							contLines += 1;
 
 							if (prevClickedDrag) {
 								var word = $("#" + prevClicked.attr("id")).html();
 								$("#" + dropId).html(word);
 								$('div').remove("#" + prevClicked.attr("id"));
+								$('div').remove("#dragI-" + prevId);
+								$('div').remove("#dragD-" + prevId);
 								$(this).unbind('click');
 								$(this).addClass("linesDrop");
+								$("#dropI-" + Id).addClass("izqBorderRight");
+								$("#dropD-" + Id).addClass("derBorderRight");
+
 							} else {
 								var word = $("#" + $(this).attr("id")).html();
+								$("#" + prevClicked.attr("id")).removeClass("selectDrop");
+								$("#dropI-" + prevId).removeClass("izqSelectDrop");
+								$("#dropD-" + prevId).removeClass("derSelectDrop");
 								$("#" + prevClicked.attr("id")).html(word);
 								$('div').remove("#" + $(this).attr("id"));
+								$('div').remove("#dragI-" + Id);
+								$('div').remove("#dragD-" + Id);
 								$("#" + prevClicked.attr("id")).unbind('click');
 								$("#" + prevClicked.attr("id")).addClass("linesDrop");
+								$("#dropI-" + prevId).addClass("izqBorderRight");
+								$("#dropD-" + prevId).addClass("derBorderRight");
 							}
 
 							if (contLines == contWord) {
 								gano();
 							}
 							prevClicked = null;
-							$(".lines").removeClass("select");
-							$(".dragWordClass").removeClass("select");
-						}else{
-							$("#error").show("slow").delay(300).hide("slow");
-						} 
+							prevId=0;
+							//$(".linesEmpty").removeClass("select");
+							//$(".dragWordClass").removeClass("select");
+						} else {
+							$(".mensajes").css("color","red").html(palabraError).show("slow").delay(300).hide("slow");
+						}
 					} else {
-						
-						$("#" + prevClicked.attr("id")).removeClass("selectClick");
-						$("#" + $(this).attr("id")).addClass("selectClick");
+						if (isDrag) {
+							$("#" + prevClicked.attr("id")).removeClass("selectDrag");
+							$("#dragI-" + prevId).removeClass("izqSelectDrag");
+							$("#dragD-" + prevId).removeClass("derSelectDrag");
+							$("#" + $(this).attr("id")).addClass("selectDrag");
+							$("#dragI-" + Id).addClass("izqSelectDrag");
+							$("#dragD-" + Id).addClass("derSelectDrag");
+						} else {
+							$("#" + prevClicked.attr("id")).removeClass("selectDrop");
+							$("#dropI-" + prevId).removeClass("izqSelectDrop");
+							$("#dropD-" + prevId).removeClass("derSelectDrop");
+							$("#" + $(this).attr("id")).addClass("selectDrop");
+							$("#dropI-" + Id).addClass("izqSelectDrop");
+							$("#dropD-" + Id).addClass("derSelectDrop");
+						}
+						prevId=Id;
 						prevClicked = $(e.currentTarget);
 					}
 				} else {
 					if (isDrag) {
-						$(".lines").addClass("select");
-						$(".dragWordClass").removeClass("select");
+						//$(".linesEmpty").addClass("select");
+						//$(".dragWordClass").removeClass("select");
+						$("#" + $(this).attr("id")).addClass("selectDrag");
+						$("#dragI-" + Id).addClass("izqSelectDrag");
+						$("#dragD-" + Id).addClass("derSelectDrag");
 					} else {
-						$(".dragWordClass").addClass("select");
-						$(".lines").removeClass("select");
+						//$(".dragWordClass").addClass("select");
+						//$(".linesEmpty").removeClass("select");
+						$("#" + $(this).attr("id")).addClass("selectDrop");
+						$("#dropI-" + Id).addClass("izqSelectDrop");
+						$("#dropD-" + Id).addClass("derSelectDrop");
 					}
 					prevClicked = $(e.currentTarget);
-					$("#" + $(this).attr("id")).addClass("selectClick");
 					prevClickedDrag = isDrag;
+					prevId=Id;
 				}
 
 			}
 
 			function gano() {
-				//alert("GANO!!");
-				$("#ganoP").delay(1000).show("slow");
-				
+				$(".mensajes").css("color","purple").html("Gano!!!").delay(1000).show("slow");
+
 			}
 
 		</script>
 		<div class="background">
-		<div class="frase"> </div>
-		<br>
-		<br>
-		<div class="wordDiv"> </div>
-		<p style="display: none" id="error"> Error</p> 
-		<p style="display: none" id="right"> Right</p> 
-		<p style="display: none" id="ganoP"> GANO!!</p> 
-        </div>
+			<div class="title"> </div>
+			<div class="choose"> </div>
+			<div class="frase"> </div>
+			<div class="inst"> </div>
+			<br>
+			<br>
+			<div class="wordDiv"> </div>
+			<div class="mensajes"> </div>
+		</div>
 	</body>
 </html>
