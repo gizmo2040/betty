@@ -161,10 +161,17 @@
 				top: 38px;
 			}
 			.mensajes{
-				font-size: 200%;
 				position: absolute;
-				top: 500px;
-				left: 500px;
+				background: url('fill/mensaje.png');
+				top: 510px;
+				left: 510px;
+				color:white;
+				font-family: 'Quicksand', sans-serif;
+				font-weight: 700;
+				font-size: 28px;
+				width: 328px;
+				height: 76px;
+				text-align: center;
 			}
 
 		</style>
@@ -185,13 +192,13 @@
 			var prevId=0;
 			var prevClickedDrag = 0;
 
-			var arrError=["error1","error2","error3"];
-			var arrRight=["right1","right2","right3"];
+			var arrError=["Try again!"];
+			var arrRight=["Awesome!","Correct!"];
 			
 			$(document).ready(init);
 
 			function init() {
-				
+				$(".mensajes").hide("fast");
 				var arrWords = [];
 
 				res = input_str.replace(dragWords, function(match, word, position) {
@@ -234,10 +241,6 @@
 			}
 
 			function wordClick(e) {
-				var palabraError= arrError[Math.floor(Math.random() * arrError.length)];
-				var palabraRight= arrRight[Math.floor(Math.random() * arrRight.length)];
-				
-				
 				var isDrag = ($( e.currentTarget ).attr("id").split("-")[0] == 'drag');
 				var Id = $(this).attr("id").split("-")[1];
 				
@@ -251,7 +254,7 @@
 						var dropI = dropId.split("-");
 
 						if (dropI[1] == dragI[1]) {
-							$(".mensajes").css("color","green").html(palabraRight).show("slow").delay(300).hide("slow");
+							$(".mensajes").html(arrRight[Math.floor(Math.random() * arrRight.length)]).show("slow").delay(800).hide("slow");
 							contLines += 1;
 
 							if (prevClickedDrag) {
@@ -288,7 +291,7 @@
 							//$(".linesEmpty").removeClass("select");
 							//$(".dragWordClass").removeClass("select");
 						} else {
-							$(".mensajes").css("color","red").html(palabraError).show("slow").delay(300).hide("slow");
+							$(".mensajes").html(arrError[Math.floor(Math.random() * arrError.length)]).show("slow").delay(800).hide("slow");
 						}
 					} else {
 						if (isDrag) {
@@ -331,7 +334,7 @@
 			}
 
 			function gano() {
-				$(".mensajes").css("color","purple").html("Gano!!!").delay(1000).show("slow");
+				$(".mensajes").html("Gano!!!").delay(1000).show("slow");
 
 			}
 
@@ -344,7 +347,8 @@
 			<br>
 			<br>
 			<div class="wordDiv"> </div>
-			<div class="mensajes"> </div>
-		</div>
+			<br>
+			<center><br> <div class="mensajes"> </div> </center>
+			</div>
 	</body>
 </html>
