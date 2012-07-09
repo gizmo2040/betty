@@ -160,17 +160,22 @@
 				left: 755;
 				top: 38px;
 			}
-			.mensajes{
+			.mensajeB{
 				position: absolute;
 				background: url('fill/mensaje.png');
+				top: 510px;
+				left: 510px;
+				width: 328px;
+				height: 76px;
+			}
+			.mensajes{
+				
 				top: 510px;
 				left: 510px;
 				color:white;
 				font-family: 'Quicksand', sans-serif;
 				font-weight: 700;
 				font-size: 28px;
-				width: 328px;
-				height: 76px;
 				text-align: center;
 			}
 
@@ -198,7 +203,7 @@
 			$(document).ready(init);
 
 			function init() {
-				$(".mensajes").hide("fast");
+				$(".mensajeB").hide("fast");
 				var arrWords = [];
 
 				res = input_str.replace(dragWords, function(match, word, position) {
@@ -254,6 +259,7 @@
 						var dropI = dropId.split("-");
 
 						if (dropI[1] == dragI[1]) {
+							$(".mensajeB").show("slow").delay(800).hide("slow");
 							$(".mensajes").html(arrRight[Math.floor(Math.random() * arrRight.length)]).show("slow").delay(800).hide("slow");
 							contLines += 1;
 
@@ -291,6 +297,7 @@
 							//$(".linesEmpty").removeClass("select");
 							//$(".dragWordClass").removeClass("select");
 						} else {
+							$(".mensajeB").show("slow").delay(800).hide("slow");
 							$(".mensajes").html(arrError[Math.floor(Math.random() * arrError.length)]).show("slow").delay(800).hide("slow");
 						}
 					} else {
@@ -334,7 +341,8 @@
 			}
 
 			function gano() {
-				$(".mensajes").html("Gano!!!").delay(1000).show("slow");
+				$(".mensajeB").delay(1000).show("slow");
+				$(".mensajes").html("Challenge complete!").delay(1000).show("slow");
 
 			}
 
@@ -348,7 +356,9 @@
 			<br>
 			<div class="wordDiv"> </div>
 			<br>
+			<div class="mensajeB"> 
 			<center><br> <div class="mensajes"> </div> </center>
+			</div>
 			</div>
 	</body>
 </html>
