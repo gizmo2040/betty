@@ -1,0 +1,197 @@
+<html>
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Quicksand:700,400' rel='stylesheet' type='text/css'>
+		<style>
+		    .background{
+		    	position: absolute;
+		    	background:url('imgs/fondo.jpg');
+				width:960px;
+			    height:599px;
+		    	
+		    }
+		    .titulo{
+				background:url('imgs/tabla.png');
+				position: absolute;
+				top: 60px;
+				left:360px;
+				width:252px;
+			    height:50px;
+			    font-family: 'Quicksand', sans-serif;
+				font-weight: 700;
+				font-size: 24px;
+				color: white;
+		    	
+			}
+			.card {
+				position: absolute;
+				display: inline-block;
+			}
+			
+			.cards{
+				position: absolute;
+				top: 100px;
+				left:180px;
+			}
+			.ButtonAb{
+				position: absolute;
+				top: 260px;
+				left:846px;
+			}
+			#B1{
+				background:url('imgs/b1.png');
+				width:100px;
+			    height:99px;
+			}
+			#B2{
+				position: relative;
+   			    top: -40px;
+				background:url('imgs/b2.png');
+				width:100px;
+			    height:99px;
+				
+			}
+			#B3{
+				 position: relative;
+   				 top: -75px;
+				background:url('imgs/b3.png');
+				
+				width:100px;
+			    height:99px;
+			}
+			
+		</style>
+		<script src="http://code.jquery.com/jquery-latest.js"> </script>
+	</head>
+	<body>
+
+		<script>
+			var confObje = {
+				"sw" : 10,
+				"sh" : 10,
+				"infoArr" : [{
+					"width" : 200,
+					"height" : 200,
+					"cols" : 2,
+					"cant" : 6,
+					"cantRepetir":3,
+					"pos":3,
+					"arrRnds":[0,1,2,3,3,3],
+					"imgUrl"  : "url('imgs/2x3.jpg')"
+				}, {
+					"width" : 150,
+					"height" : 150,
+					"cols" : 3,
+					"cant" : 12,
+					"cantRepetir":5,
+					"pos":7,
+					"arrRnds":[0,1,2,3,4,5,6,7,7,7,7,7],
+					"imgUrl" : "url('imgs/3x4.jpg')"
+				}, {
+					"width" : 110,
+					"height" : 110,
+					"cols" : 4,
+					"cant" : 20,
+					"cantRepetir":5,
+					"pos":8,
+					"arrRnds":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,8,8,8,8],
+					"imgUrl"  : "url('imgs/4x5.jpg')"
+				}]
+			}
+
+			var arrRnds = [];
+			var currTop = 0;
+			var currLeft = 0;
+			var contPair = 0;
+			var level = 0;
+			var prevClicked = null;
+			var NumGano=0;
+			var contGano=0;
+			
+			$(document).ready(addListeners);
+			
+			function addListeners(e){
+				$(".button").click(funClickButton);
+			}
+			
+			function init() {
+				$(".titulo").html("Click on the maps");
+				
+
+				for ( i = 0; i < confObje.infoArr[level].cant; i++) {
+					if (currLeft == confObje.infoArr[level].cols) {
+						currTop++;
+						currLeft = 0;
+					}
+
+					var xx = (confObje.infoArr[level].width + confObje.sw) * currTop;
+					var yy = (confObje.infoArr[level].height + confObje.sh) * currLeft;
+					var rand = (confObje.infoArr[level].arrRnds).splice(Math.floor(Math.random() * (confObje.infoArr[level].arrRnds).length),1)[0];
+					
+
+					$('<div/>', {
+						'id' : "card-" + i,
+						'class' : "card",
+						'num' : rand
+					}).css({
+						"top" : yy,
+						"left" : xx,
+						"width" : confObje.infoArr[level].width,
+						"height" : confObje.infoArr[level].height,
+						"background" : confObje.infoArr[level].imgUrl + " no-repeat -" +  (rand* confObje.infoArr[level].width )+ "px -0px"
+						
+					}).appendTo('.cards');
+
+					currLeft++;
+					
+				}
+				$(".card").click(funClickCard);
+			}
+
+			function funClickCard(e) {
+				
+				if($(this).attr('num') == confObje.infoArr[level].pos){
+				 contGano++;
+				 $(this).unbind('click');
+				 alert("Bien!!");
+				 if(contGano== confObje.infoArr[level].cantRepetir){
+				  	gano();
+				  }
+				 }
+			}
+		
+			
+			function gano(){
+						alert("GANO");
+			}
+
+				
+			function funClickButton(e){
+				switch($(this).attr("id")){
+					case 'B1':
+						level=0;
+						$(this).css("background","url('imgs/BOTONN1.png')");
+					break;
+					case 'B2':
+						level=1;
+						$(this).css("background","url('imgs/BOTONN2.png')");
+					break;
+					case 'B3':
+						level=2;
+						$(this).css("background","url('imgs/BOTONN3.png')");
+					break;
+				}
+				$(".button").unbind("click");
+				init();
+			}
+		</script>
+		<div class="background">
+		<div class="cards"> </div>
+		<center> <div class="titulo"> </center> </div>
+		<div class="ButtonAb"> 
+			<div id="B1" class="button"> </div>
+			<div id="B2" class="button"> </div>
+			<div id="B3" class="button"> </div>
+		 </div>
+		</div>
+	</body>
+</html>
