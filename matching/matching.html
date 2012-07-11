@@ -4,12 +4,24 @@
 		<style>
 		    .background{
 		    	position: absolute;
+		    	/*background:url('<?= base_path() . path_to_theme() . "/images/challenges/matching/fondo.jpg" ?>');*/
 		    	background:url('imgs/fondo.jpg');
 				width:960px;
 			    height:599px;
 		    	
 		    }
+		    
+			.choose {
+				position: absolute;
+				/*background:url('<?= base_path() . path_to_theme() . "/images/challenges/matching/choose.png" ?>');*/
+				background: url('imgs/choose.png');
+				width: 118px;
+				height: 50px;
+				left: 839px;
+				top: 222px;
+			}
 		    .titulo{
+		    	/*background:url('<?= base_path() . path_to_theme() . "/images/challenges/matching/tabla.png" ?>');*/
 				background:url('imgs/tabla.png');
 				position: absolute;
 				top: 60px;
@@ -37,7 +49,11 @@
 				top: 260px;
 				left:846px;
 			}
+			.selected{
+				border: 3px solid blue;
+			}
 			#B1{
+				/*background:url('<?= base_path() . path_to_theme() . "/images/challenges/matching/b1.png" ?>');*/
 				background:url('imgs/b1.png');
 				width:100px;
 			    height:99px;
@@ -45,6 +61,7 @@
 			#B2{
 				position: relative;
    			    top: -40px;
+   			    /*background:url('<?= base_path() . path_to_theme() . "/images/challenges/matching/b2.png" ?>');*/
 				background:url('imgs/b2.png');
 				width:100px;
 			    height:99px;
@@ -54,7 +71,7 @@
 				 position: relative;
    				 top: -75px;
 				background:url('imgs/b3.png');
-				
+				/*background:url('<?= base_path() . path_to_theme() . "/images/challenges/matching/b3.png" ?>');*/
 				width:100px;
 			    height:99px;
 			}
@@ -76,6 +93,7 @@
 					"cantRepetir":3,
 					"pos":3,
 					"arrRnds":[0,1,2,3,3,3],
+					//"imgUrl"  : "url('<?= base_path() . path_to_theme() . /images/challenges/matching/2x3.jpg ?>')"
 					"imgUrl"  : "url('imgs/2x3.jpg')"
 				}, {
 					"width" : 150,
@@ -85,6 +103,7 @@
 					"cantRepetir":5,
 					"pos":7,
 					"arrRnds":[0,1,2,3,4,5,6,7,7,7,7,7],
+					//"imgUrl"  : "url('<?= base_path() . path_to_theme() . /images/challenges/matching/3x4.jpg ?>')"
 					"imgUrl" : "url('imgs/3x4.jpg')"
 				}, {
 					"width" : 110,
@@ -94,6 +113,7 @@
 					"cantRepetir":5,
 					"pos":8,
 					"arrRnds":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,8,8,8,8],
+					//"imgUrl"  : "url('<?= base_path() . path_to_theme() . /images/challenges/matching/4x5.jpg ?>')"
 					"imgUrl"  : "url('imgs/4x5.jpg')"
 				}]
 			}
@@ -152,7 +172,7 @@
 				if($(this).attr('num') == confObje.infoArr[level].pos){
 				 contGano++;
 				 $(this).unbind('click');
-				 alert("Bien!!");
+				 $(this).addClass("selected");
 				 if(contGano== confObje.infoArr[level].cantRepetir){
 				  	gano();
 				  }
@@ -169,14 +189,17 @@
 				switch($(this).attr("id")){
 					case 'B1':
 						level=0;
+						//$(this).css("background","url('<?= base_path() . path_to_theme() . /images/challenges/matching/BOTONN1.png?>')");
 						$(this).css("background","url('imgs/BOTONN1.png')");
 					break;
 					case 'B2':
 						level=1;
+						//$(this).css("background","url('<?= base_path() . path_to_theme() . /images/challenges/matching/BOTONN2.png?>')");
 						$(this).css("background","url('imgs/BOTONN2.png')");
 					break;
 					case 'B3':
 						level=2;
+						//$(this).css("background","url('<?= base_path() . path_to_theme() . /images/challenges/matching/BOTONN3.png?>')");
 						$(this).css("background","url('imgs/BOTONN3.png')");
 					break;
 				}
@@ -187,6 +210,7 @@
 		<div class="background">
 		<div class="cards"> </div>
 		<center> <div class="titulo"> </center> </div>
+		<div class="choose"> </div>
 		<div class="ButtonAb"> 
 			<div id="B1" class="button"> </div>
 			<div id="B2" class="button"> </div>
